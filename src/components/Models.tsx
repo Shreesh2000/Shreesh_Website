@@ -123,7 +123,69 @@ export function RetroTerminal(props: React.ComponentPropsWithoutRef<'group'>) {
   );
 }
 
-// 3. WEB MONITORS: Workstation Setup representing Frontend
+// 3. iMAC WORKSTATION: Single Apple iMac for Projects section
+export function ImacWorkstation(props: React.ComponentPropsWithoutRef<'group'>) {
+  const screenRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (screenRef.current) {
+      const t = state.clock.elapsedTime;
+      (screenRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        0.12 + Math.sin(t * 1.5) * 0.06;
+    }
+  });
+
+  return (
+    <group {...props}>
+      <Float speed={1.1} rotationIntensity={0.08} floatIntensity={0.25}>
+        {/* Desk */}
+        <Box args={[5.5, 0.12, 2.8]} position={[0, -1.45, 0]}>
+          <meshStandardMaterial color="#0a0a0a" roughness={0.9} />
+        </Box>
+
+        <group position={[0, 0.15, 0]}>
+          {/* Display housing — silver aluminum */}
+          <Box args={[3.6, 2.35, 0.08]}>
+            <meshStandardMaterial color="#d4d4d8" metalness={0.92} roughness={0.12} />
+          </Box>
+          {/* Inner bezel */}
+          <Box args={[3.48, 2.22, 0.09]} position={[0, 0, 0.01]}>
+            <meshStandardMaterial color="#09090b" roughness={0.95} />
+          </Box>
+          {/* Screen glow */}
+          <Box ref={screenRef} args={[3.38, 2.12, 0.04]} position={[0, 0.02, 0.05]}>
+            <meshStandardMaterial
+              color="#0c1222"
+              emissive="#22d3ee"
+              emissiveIntensity={0.15}
+              roughness={0.05}
+              metalness={0.9}
+            />
+          </Box>
+          {/* Chin strip */}
+          <Box args={[3.6, 0.18, 0.09]} position={[0, -1.18, 0.01]}>
+            <meshStandardMaterial color="#d4d4d8" metalness={0.92} roughness={0.12} />
+          </Box>
+          {/* Neck */}
+          <Box args={[0.18, 0.55, 0.06]} position={[0, -1.52, -0.02]}>
+            <meshStandardMaterial color="#a1a1aa" metalness={0.9} roughness={0.15} />
+          </Box>
+          {/* Foot */}
+          <Box args={[1.35, 0.04, 0.75]} position={[0, -1.78, 0]}>
+            <meshStandardMaterial color="#a1a1aa" metalness={0.9} roughness={0.15} />
+          </Box>
+        </group>
+
+        {/* Keyboard */}
+        <Box args={[2.2, 0.04, 0.85]} position={[0, -1.38, 0.85]}>
+          <meshStandardMaterial color="#71717a" metalness={0.7} roughness={0.3} />
+        </Box>
+      </Float>
+    </group>
+  );
+}
+
+// 3b. WEB MONITORS: Workstation Setup representing Frontend
 export function WebMonitors(props: React.ComponentPropsWithoutRef<'group'>) {
   const group = useRef<THREE.Group>(null);
   
