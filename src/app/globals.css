@@ -970,20 +970,19 @@ h6 {
    THEME 3: GenAI control center nodes (Futuristic Purple Grid)
    ========================================== */
 .ai-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  align-items: stretch;
   background: linear-gradient(135deg, rgba(16, 5, 28, 0.85) 0%, rgba(3, 3, 10, 0.9) 100%);
   border: 1px solid rgba(189, 0, 255, 0.35);
   border-radius: 12px;
   padding: 1.5rem;
-  max-width: 580px;
-  max-height: calc(100vh - 12rem);
-  height: min(520px, calc(100vh - 12rem));
+  max-width: 100%;
   box-shadow: 0 15px 45px rgba(189, 0, 255, 0.25), 0 0 30px rgba(189, 0, 255, 0.05);
   backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
   isolation: isolate;
   transition: box-shadow 0.4s ease, border-color 0.4s ease;
 }
@@ -2497,6 +2496,11 @@ h6 {
   margin-bottom: 1.5rem;
 }
 
+.contact-card-responsive {
+  padding: 3rem;
+  gap: 3rem;
+}
+
 .contact-links {
   display: flex;
   flex-direction: column;
@@ -3339,3 +3343,354 @@ html {
     min-height: 44px;
   }
 }
+
+/* ── Device-Adaptive Showcase Frames ── */
+.device-showcase-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.55));
+}
+
+.device-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.device-screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0c1222 0%, #111827 100%);
+}
+
+.device-logo {
+  width: 14px;
+  height: 14px;
+  color: #71717a;
+  opacity: 0.85;
+}
+
+/* ── iPhone Frame ── */
+.device-iphone {
+  max-width: 340px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #1c1c1e 0%, #2c2c2e 100%);
+  border-radius: 40px;
+  padding: 12px;
+  border: 2px solid #3a3a3c;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+  position: relative;
+}
+
+.device-iphone .device-screen {
+  height: auto;
+  border-radius: 28px;
+  aspect-ratio: 9 / 19.5;
+  overflow: hidden;
+}
+
+.iphone-notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 28px;
+  background: #1c1c1e;
+  border-radius: 0 0 18px 18px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iphone-notch-camera {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+}
+
+.iphone-home-bar {
+  width: 120px;
+  height: 4px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+  margin: 8px auto 0;
+}
+
+/* ── iPad Frame ── */
+.device-ipad {
+  max-width: 600px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #e4e4e7 0%, #d4d4d8 100%);
+  border-radius: 20px;
+  padding: 16px;
+  border: 2px solid #a1a1aa;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.5);
+  position: relative;
+}
+
+.device-ipad .device-screen {
+  height: auto;
+  border-radius: 8px;
+  aspect-ratio: 4 / 3;
+  border: 1px solid #18181b;
+}
+
+.ipad-camera {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #71717a;
+  z-index: 5;
+}
+
+/* ── MacBook Frame ── */
+.device-macbook {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.macbook-display {
+  background: linear-gradient(180deg, #e4e4e7 0%, #d4d4d8 100%);
+  border-radius: 12px 12px 0 0;
+  padding: 10px 10px 0;
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.macbook-display .device-screen {
+  height: auto;
+  border-radius: 6px 6px 0 0;
+  aspect-ratio: 16 / 10;
+  border: 2px solid #18181b;
+}
+
+.macbook-camera {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #52525b;
+  z-index: 5;
+}
+
+.macbook-base {
+  background: linear-gradient(180deg, #a1a1aa 0%, #d4d4d8 5%, #a1a1aa 100%);
+  height: 14px;
+  border-radius: 0 0 2px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.macbook-notch {
+  width: 80px;
+  height: 4px;
+  background: #71717a;
+  border-radius: 0 0 4px 4px;
+  position: absolute;
+  top: 0;
+}
+
+.macbook-trackpad {
+  display: none;
+}
+
+.macbook-lip {
+  width: 110%;
+  max-width: 860px;
+  height: 5px;
+  background: linear-gradient(180deg, #a1a1aa, #71717a);
+  border-radius: 0 0 8px 8px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ── iMac Frame (reuse existing styles) ── */
+.device-imac {
+  width: 100%;
+}
+
+.device-imac .imac-screen-frame {
+  position: relative;
+  background: #09090b;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  border: 2px solid #18181b;
+}
+
+/* ── TV Frame ── */
+.device-tv {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.tv-bezel {
+  background: linear-gradient(180deg, #1c1c1e 0%, #0a0a0a 100%);
+  border-radius: 12px;
+  padding: 8px;
+  border: 2px solid #2c2c2e;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+}
+
+.tv-bezel .device-screen {
+  height: auto;
+  border-radius: 6px;
+  aspect-ratio: 16 / 9;
+}
+
+.tv-stand-neck {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(90deg, #3a3a3c, #52525b 50%, #3a3a3c);
+  margin: 0 auto;
+}
+
+.tv-stand-base {
+  width: 180px;
+  height: 8px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(180deg, #52525b, #3a3a3c);
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ── Experience & AI Panel base grid styles ── */
+.experience-interactive-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.experience-interactive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* ── Mobile scene root (replaces Canvas on small screens) ── */
+.mobile-scene-root {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--background);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ── Mobile Overrides (max-width: 768px) ── */
+@media (max-width: 768px) {
+  /* Hero photo - restore on mobile with blending */
+  .hero-backdrop-photo {
+    opacity: 0.25 !important;
+    filter: blur(8px) grayscale(100%) !important;
+  }
+
+  .hero-backdrop-mesh {
+    background: linear-gradient(to bottom, transparent 0%, rgba(7,11,20,0.95) 100%) !important;
+  }
+
+  /* Contact card responsive padding */
+  .contact-card-responsive {
+    padding: 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Sections should not be fixed height on mobile */
+  .scroll-section {
+    height: auto !important;
+    min-height: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .scroll-section-wide {
+    min-height: auto !important;
+  }
+
+  /* Experience layout stacking */
+  .experience-interactive-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .experience-interactive-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* AI panel */
+  .ai-panel {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .ai-nodes-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer */
+  .site-footer-pro {
+    margin-top: 2rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Contact section fixes */
+  .scroll-section-center {
+    min-height: auto !important;
+    height: auto !important;
+  }
+}
+
+/* ── TV & Ultra-Wide ── */
+@media (min-width: 1920px) {
+  .section-content-wrapper,
+  .nav-header-container {
+    max-width: 1600px !important;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 3vw, 4rem) !important;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 6vw, 6rem) !important;
+  }
+
+  .hero-role, .section-desc {
+    font-size: 1.25rem !important;
+  }
+
+  .stat-value {
+    font-size: 2.5rem !important;
+  }
+
+  .stats-grid {
+    max-width: 1000px !important;
+    gap: 1.5rem !important;
+  }
+}
+

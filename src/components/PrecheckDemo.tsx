@@ -22,7 +22,7 @@ export default function PrecheckDemo() {
       <div style={{ padding: '12px 16px', borderBottom: '1px solid #fde68a', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#f59e0b', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Factory size={16} />
-          <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Godrej Precheck System</span>
+          <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>Precheck System</span>
         </div>
         <div style={{ display: 'flex', gap: '4px' }}>
           <button style={{ padding: '4px 10px', borderRadius: '6px', background: activeTab === 'generate' ? '#fff' : 'transparent', color: activeTab === 'generate' ? '#d97706' : '#fff', border: 'none', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => setActiveTab('generate')}>Generate QR</button>
