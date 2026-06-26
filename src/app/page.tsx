@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import {
   ExternalLink,
@@ -24,17 +25,29 @@ import {
   Activity,
   Code,
 } from 'lucide-react';
-import CinematicScene from '@/components/Scene';
 import ImacShowcase, { type ShowcaseProject } from '@/components/ImacShowcase';
 import ProjectDetailModal from '@/components/ProjectDetailModal';
 import SkillVisualPanel from '@/components/SkillVisualPanel';
 import SiteFooter from '@/components/SiteFooter';
-import WingsAnalyticsDemo from '@/components/WingsAnalyticsDemo';
-import PrecheckDemo from '@/components/PrecheckDemo';
-import WibiDemo from '@/components/WibiDemo';
-import WingsTalkDemo from '@/components/WingsTalkDemo';
-import MeetingHubDemo from '@/components/MeetingHubDemo';
-import ShipTrackingDemo from '@/components/ShipTrackingDemo';
+
+const CinematicScene = dynamic(() => import('@/components/Scene'), {
+  ssr: false,
+  loading: () => (
+    <div style={{ position: 'fixed', inset: 0, background: '#04060d', zIndex: -1 }}>
+      <div className="ambient-orbs" aria-hidden="true">
+        <div className="orb orb-mint" />
+        <div className="orb orb-sky" />
+        <div className="orb orb-violet" />
+      </div>
+    </div>
+  )
+});
+const WingsAnalyticsDemo = dynamic(() => import('@/components/WingsAnalyticsDemo'), { ssr: false });
+const PrecheckDemo = dynamic(() => import('@/components/PrecheckDemo'), { ssr: false });
+const WibiDemo = dynamic(() => import('@/components/WibiDemo'), { ssr: false });
+const WingsTalkDemo = dynamic(() => import('@/components/WingsTalkDemo'), { ssr: false });
+const MeetingHubDemo = dynamic(() => import('@/components/MeetingHubDemo'), { ssr: false });
+const ShipTrackingDemo = dynamic(() => import('@/components/ShipTrackingDemo'), { ssr: false });
 import { ScrollReveal, ScrollItem } from '@/components/ScrollReveal';
 import {
   profile,
@@ -213,7 +226,7 @@ export default function Home() {
     }
   };
 
-  const handleAskChatbot = (question: 'wingstalk' | 'pipeline' | 'analytics') => {
+  const handleAskChatbot = useCallback((question: 'wingstalk' | 'pipeline' | 'analytics') => {
     if (typingStatus) return;
     setActiveQuestion(question);
     setTypingStatus(true);
@@ -229,7 +242,7 @@ export default function Home() {
         setTypingStatus(false);
       }
     }, 12);
-  };
+  }, [typingStatus]);
 
 
 
@@ -561,7 +574,7 @@ export default function Home() {
             </motion.h2>
             <p className="section-desc">Try the chatbot simulator — ask about real project architectures.</p>
 
-            <div className="ai-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', alignItems: 'stretch' }}>
+            <div className="ai-panel">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div className="ai-header">
                   <span className="ai-header-title">RAG Chatbot Simulator</span>
@@ -611,7 +624,7 @@ export default function Home() {
               <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div className="ai-nodes-flow">
                   <span className="ai-nodes-label">Architecture Nodes</span>
-                  <div className="ai-nodes-grid" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+                  <div className="ai-nodes-grid">
                     {[
                       { title: 'Vector Search', tag: 'PGVector' },
                       { title: 'Embeddings', tag: 'HuggingFace' },
@@ -656,7 +669,7 @@ export default function Home() {
               Professional Experience
             </motion.h2>
 
-            <div className="experience-interactive-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem', width: '100%', maxWidth: '1100px' }}>
+            <div className="experience-interactive-layout">
               <div className="experience-role-info" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', background: 'rgba(15,23,42,0.6)', padding: '2rem', borderRadius: '24px', border: '1px solid rgba(148,163,184,0.1)', backdropFilter: 'blur(10px)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'linear-gradient(135deg, #0ea5e9, #6366f1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -681,7 +694,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="experience-interactive-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+              <div className="experience-interactive-grid">
                 <motion.div whileHover={{ y: -4, scale: 1.02 }} style={{ background: 'rgba(15,23,42,0.4)', borderRadius: '20px', padding: '1.5rem', border: '1px solid rgba(236,72,153,0.2)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                     <h4 style={{ margin: 0, color: '#f472b6', fontSize: '1.1rem' }}>Enterprise RAG Engine</h4>
@@ -819,6 +832,7 @@ export default function Home() {
 
             <ScrollItem>
               <motion.div
+                className="contact-card-responsive"
                 initial={{ opacity: 0, y: 40, scale: 0.94 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: '-80px' }}
@@ -827,11 +841,9 @@ export default function Home() {
                   display: 'flex', 
                   flexDirection: 'row', 
                   flexWrap: 'wrap',
-                  gap: '3rem', 
                   background: 'rgba(15,23,42,0.6)', 
                   border: '1px solid rgba(255,255,255,0.08)', 
                   borderRadius: '24px', 
-                  padding: '3rem', 
                   width: '100%',
                   maxWidth: '900px',
                   margin: '0 auto',
@@ -839,9 +851,9 @@ export default function Home() {
                 }}
               >
                 <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '1rem', justifyContent: 'center' }}>
-                  <div style={{ position: 'relative', width: '120px', height: '120px', borderRadius: '50%', overflow: 'hidden', marginBottom: '1rem', border: '2px solid rgba(34,211,238,0.3)', boxShadow: '0 0 30px rgba(34,211,238,0.2)' }}>
-                    <Image src="/shreesh-profile.png" alt="" fill style={{ objectFit: 'cover' }} />
-                  </div>
+                <div style={{ position: 'relative', width: '120px', height: '120px', borderRadius: '50%', overflow: 'hidden', marginBottom: '1rem', border: '2px solid rgba(34,211,238,0.3)', boxShadow: '0 0 30px rgba(34,211,238,0.2)' }}>
+                  <Image src="/shreesh-profile.png" alt="" fill style={{ objectFit: 'cover', objectPosition: 'top center' }} />
+                </div>
                   <h3 style={{ margin: 0, fontSize: '2.5rem', fontWeight: 800, background: 'linear-gradient(to right, #fff, #94a3b8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{profile.name}</h3>
                   <p style={{ margin: 0, color: '#38bdf8', fontWeight: 'bold', fontSize: '1.1rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>{profile.role}</p>
                   <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.6, marginTop: '1rem', maxWidth: '300px' }}>

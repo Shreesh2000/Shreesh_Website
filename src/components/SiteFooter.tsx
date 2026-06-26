@@ -9,7 +9,7 @@ export default function SiteFooter() {
     <footer className="site-footer-pro" style={{ position: 'relative', overflow: 'hidden' }}>
       <div className="footer-grid" style={{ position: 'relative', zIndex: 1 }}>
         <div className="footer-col">
-          <span className="footer-logo">Shreesh.</span>
+          <span className="footer-logo">Shreesh Kawathekar.</span>
           <p className="footer-tagline">
             Building intelligent RAG systems and high-performance React architectures for enterprise scale.
           </p>
@@ -62,17 +62,15 @@ export default function SiteFooter() {
             className="btn-outline footer-cta"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            style={{ marginTop: '0.25rem' }}
           >
             Hire Me
           </motion.a>
         </div>
       </div>
 
-      <div className="footer-bottom">
+      <div className="footer-bottom" style={{ justifyContent: 'center' }}>
         <span>&copy; {currentYear} Shreesh Kawathekar. All rights reserved.</span>
-        <span className="footer-built">
-          Built with Next.js 14, Three.js, and Framer Motion.
-        </span>
       </div>
     </footer>
   );

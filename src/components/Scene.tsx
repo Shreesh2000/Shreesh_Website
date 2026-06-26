@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Environment, ScrollControls, Scroll, SpotLight } from '@react-three/drei';
 import {
@@ -65,17 +66,55 @@ function ModelStages() {
   );
 }
 
+const MOBILE_BREAKPOINT = 768;
+
 export default function CinematicScene({ children }: { children: React.ReactNode }) {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const check = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  // SSR: render nothing until mounted (prevents hydration mismatch)
+  if (!mounted) {
+    return (
+      <div style={{ background: '#04060d', minHeight: '100vh' }}>
+        {children}
+      </div>
+    );
+  }
+
+  // Mobile: skip the heavy 3D Canvas entirely and render a plain scrollable page
+  if (isMobile) {
+    return (
+      <div className="mobile-scene-root">
+        <div className="ambient-orbs" aria-hidden="true">
+          <div className="orb orb-mint" />
+          <div className="orb orb-sky" />
+          <div className="orb orb-violet" />
+        </div>
+        {children}
+      </div>
+    );
+  }
+
+  // Desktop: full 3D experience
   return (
     <div id="canvas-container" className="canvas-container">
       <Canvas
         camera={{ position: [0, 1.5, 9.5], fov: 45 }}
-        dpr={[1, 1.75]}
-        gl={{ antialias: true, powerPreference: 'high-performance' }}
+        dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
+        gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }}
       >
         <color attach="background" args={['#04060d']} />
 
-        <ScrollControls pages={7.2} damping={0.28} distance={1}>
+        <ScrollControls pages={8.28} damping={0.28} distance={1}>
           <Scroll>
             <ModelStages />
           </Scroll>
