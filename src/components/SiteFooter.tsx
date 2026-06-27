@@ -36,7 +36,7 @@ export default function SiteFooter() {
             LinkedIn
           </motion.a>
           <motion.a
-            href="https://github.com/shreesh-kawathekar"
+            href="https://github.com/Shreesh2000"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link"

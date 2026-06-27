@@ -1,0 +1,709 @@
+/* Hide scrollbars for cinematic fullscreen feel */
+body {
+body::-webkit-scrollbar {
+  z-index: 99;
+  backdrop-filter: blur(4px);
+}
+
+/* ΓöÇΓöÇ iMac Showcase ΓöÇΓöÇ */
+.imac-showcase {
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.imac-project-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.imac-project-tab {
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Nunito Sans', sans-serif;
+  min-height: 36px;
+}
+
+.imac-project-tab:hover {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.imac-project-tab.active {
+  color: var(--tab-accent, #22d3ee);
+  border-color: color-mix(in srgb, var(--tab-accent, #22d3ee) 50%, transparent);
+  background: color-mix(in srgb, var(--tab-accent, #22d3ee) 12%, transparent);
+}
+
+.imac-project-tab {
+  position: relative;
+  overflow: hidden;
+}
+
+.imac-project-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--tab-accent, #22d3ee);
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imac-project-tab.active::after {
+  width: 70%;
+}
+
+.imac-device {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.55));
+}
+
+.imac-enclosure {
+  width: 100%;
+  max-width: 780px;
+  background: linear-gradient(180deg, #e4e4e7 0%, #d4d4d8 40%, #a1a1aa 100%);
+  border-radius: 14px 14px 0 0;
+  padding: 10px 10px 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.imac-screen-frame {
+  position: relative;
+  background: #09090b;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border: 2px solid #18181b;
+}
+
+.imac-camera-dot {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #27272a;
+  border: 1px solid #3f3f46;
+  z-index: 3;
+}
+
+.imac-screen-viewport {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.imac-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+  display: block;
+}
+
+.imac-live-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #86efac;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+
+.imac-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: ai-pulse 2s infinite;
+}
+
+.imac-fallback-screen {
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(160deg, #0c1222 0%, #111827 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overflow-y: auto;
+}
+
+.imac-fallback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.imac-fallback-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.imac-fallback-badge {
+  font-size: 0.62rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--screen-accent, #22d3ee) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--screen-accent, #22d3ee) 35%, transparent);
+  color: var(--screen-accent, #22d3ee);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.imac-fallback-sub {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.imac-inline-demo {
+  flex: 1;
+  margin-top: 0.25rem;
+}
+
+.imac-demo-stat {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.68rem;
+  color: #94a3b8;
+}
+
+.imac-demo-stat strong {
+  font-size: 1.1rem;
+  color: #22d3ee;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.imac-chin {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #d4d4d8, #a1a1aa);
+}
+
+.imac-logo {
+  width: 14px;
+  height: 14px;
+  color: #71717a;
+  opacity: 0.85;
+}
+
+.imac-neck {
+  width: 52px;
+  height: 42px;
+  background: linear-gradient(90deg, #71717a, #d4d4d8 50%, #71717a);
+  clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+}
+
+.imac-foot {
+  width: 140px;
+  height: 8px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(180deg, #a1a1aa, #71717a);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.imac-details {
+  width: 100%;
+  text-align: left;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  backdrop-filter: blur(12px);
+}
+
+.imac-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.imac-details-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.15rem;
+  margin-bottom: 0.15rem;
+}
+
+.imac-details-subtitle {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.imac-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+  color: #22d3ee;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  min-height: 36px;
+}
+
+.imac-open-btn:hover {
+  background: rgba(34, 211, 238, 0.22);
+  color: white;
+}
+
+.imac-details-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+}
+
+.imac-details-bullets li {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  padding-left: 0.85rem;
+  position: relative;
+}
+
+.imac-details-bullets li::before {
+  content: 'Γû╕';
+  position: absolute;
+  left: 0;
+  color: #22d3ee;
+}
+
+.imac-stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* ΓöÇΓöÇ Responsive: fluid type & layout ΓöÇΓöÇ */
+html {
+  font-size: clamp(14px, 1.05vw, 17px);
+}
+
+/* Tablet landscape / small laptop */
+@media (max-width: 1024px) {
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+  }
+
+  .stats-grid {
+    max-width: 100%;
+  }
+
+  .imac-showcase {
+    max-width: 100%;
+  }
+
+  .skill-explorer {
+    max-width: 100%;
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  .nav-header {
+    padding: 0.85rem 1rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(280px, 85vw);
+    height: 100vh;
+    height: 100dvh;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 4.5rem 1.25rem 2rem;
+    background: rgba(4, 6, 13, 0.97);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 105;
+    backdrop-filter: blur(16px);
+    overflow-y: auto;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 0.85rem 0.5rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .scroll-section {
+    padding: 4.5rem 1rem 2rem;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .scroll-section-wide {
+    min-height: auto;
+    padding-bottom: 2.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.45rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 9vw, 2.75rem);
+  }
+
+  .hero-meta-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .hero-backdrop-photo {
+    right: 50%;
+    top: 28%;
+    transform: translate(50%, -50%);
+    width: 120%;
+    height: 75%;
+  }
+
+  .hero-backdrop-img {
+    -webkit-mask-image: radial-gradient(ellipse 80% 72% at 50% 32%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 55%, transparent 85%);
+    mask-image: radial-gradient(ellipse 80% 72% at 50% 32%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.75) 55%, transparent 85%);
+    filter: saturate(1.1) contrast(1.04) brightness(1.12);
+  }
+
+  .hero-backdrop-mesh {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 35%, rgba(45, 212, 191, 0.08) 0%, transparent 55%),
+      linear-gradient(to bottom, var(--background) 0%, rgba(7, 11, 20, 0.88) 35%, rgba(7, 11, 20, 0.95) 100%);
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .skill-explorer {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-left-col {
+    gap: 1rem;
+  }
+
+  .skill-main-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-visual-wrap {
+    min-height: 180px;
+  }
+
+  .project-modal-body {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .skill-category-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .skill-category-btn {
+    flex: 1 1 calc(50% - 0.25rem);
+    min-width: 0;
+    min-height: 44px;
+  }
+
+  .skill-category-btn .skill-cat-arrow {
+    display: none;
+  }
+
+  .terminal-panel,
+  .browser-window,
+  .ai-panel,
+  .db-blueprint-panel,
+  .imac-showcase {
+    max-width: 100%;
+  }
+
+  .ai-panel,
+  .db-blueprint-panel {
+    height: min(460px, calc(100dvh - 9rem));
+    max-height: calc(100dvh - 9rem);
+  }
+
+  .scroll-section-right,
+  .scroll-section-left {
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .section-block-right {
+    align-items: stretch;
+  }
+
+  .section-desc-right,
+  .section-desc-center {
+    align-self: stretch;
+    text-align: left;
+  }
+
+  .section-title-center {
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .experience-card {
+    max-width: 100%;
+  }
+
+  .imac-project-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .imac-project-tab {
+    flex-shrink: 0;
+  }
+
+  .imac-enclosure {
+    max-width: 100%;
+    padding: 6px 6px 0;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .imac-screen-frame {
+    aspect-ratio: 16 / 11;
+  }
+
+  .imac-neck {
+    width: 40px;
+    height: 32px;
+  }
+
+  .imac-foot {
+    width: 110px;
+  }
+
+  .imac-details {
+    padding: 1rem;
+  }
+
+  .imac-details-header {
+    flex-direction: column;
+  }
+
+  .imac-open-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-card-body {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .orb {
+    opacity: 0.2;
+    filter: blur(60px);
+  }
+
+  .canvas-container {
+    opacity: 0.85;
+  }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+
+  .hero-badge {
+    font-size: 0.65rem;
+  }
+
+  .hero-contact-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-contact-row .btn-primary,
+  .hero-contact-row .btn-outline {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-card {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .skill-category-btn {
+    flex: 1 1 100%;
+  }
+
+  .ai-nodes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .db-grid-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .imac-live-badge {
+    font-size: 0.55rem;
+    top: 6px;
+    right: 6px;
+  }
+
+  .rag-flow {
+    justify-content: flex-start;
+  }
+
+  .bar-chart {
+    height: 70px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Large monitors & projectors */
+@media (min-width: 1440px) {
+
+  .section-block,
+  .section-content-wrapper {
+    max-width: 1200px;
+  }
+
+  .imac-showcase {
+    max-width: 1000px;
+  }
+
+  .imac-enclosure {
+    max-width: 860px;
+  }
+
+  .hero-title {
+    font-size: 4.5rem;
+  }
+}
+
+@media (min-width: 1920px) {
+
+  .section-block,
+  .section-content-wrapper {
+    max-width: 1320px;
+  }
+
+  .imac-showcase {
+    max-width: 1100px;
+  }
+
+  .nav-header-container {
+    max-width: 1400px;
+  }
