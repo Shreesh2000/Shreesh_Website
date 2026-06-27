@@ -24,6 +24,8 @@ import {
   Database,
   Activity,
   Code,
+  Calendar,
+  BookOpen,
 } from 'lucide-react';
 import ImacShowcase, { type ShowcaseProject } from '@/components/ImacShowcase';
 import ProjectDetailModal from '@/components/ProjectDetailModal';
@@ -55,7 +57,6 @@ import {
   skillCategories,
   projects,
   experience,
-  education,
   aiResponses,
   type SkillCategoryId,
   type ProjectId,
@@ -781,34 +782,136 @@ export default function Home() {
         </section>
 
         {/* ── EDUCATION ── */}
-        <section id="education" className="scroll-section scroll-section-left">
-          <motion.div
-            className="section-block"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+        <section id="education" className="edu-timeline-section">
+          
+          {/* Section Header */}
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <motion.div
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1rem', borderRadius: '999px', background: 'rgba(34,211,238,0.08)', border: '1px solid rgba(34,211,238,0.25)', color: '#22d3ee', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' as const, marginBottom: '1rem' }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <GraduationCap size={14} /> Academic Background
+            </motion.div>
+            
             <motion.h2
-              className="section-title"
+              className="edu-section-heading"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              style={{ '--theme-accent': '#ffffff' } as React.CSSProperties}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
               Education
             </motion.h2>
+            
+            <motion.p
+              style={{ color: '#94a3b8', marginTop: '1rem', fontSize: '1.1rem' }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              From foundation to engineering — a decade of learning
+            </motion.p>
+          </div>
 
-            <div className="education-card">
-              <div className="edu-icon"><GraduationCap size={24} /></div>
-              <div>
-                <h3 className="edu-degree">{education.degree}</h3>
-                <p className="edu-school">{education.school}</p>
-                <p className="edu-meta">{education.city} · Graduated {education.graduated}</p>
+          <div className="edu-carousel-container">
+            {/* ENTRY 1: School */}
+            <motion.div
+              className="edu-timeline-card"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+            >
+              <div className="edu-card-image-wrap">
+                <Image
+                  src="/school-real.jpg"
+                  alt="St. Aloysius School"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+                <div className="edu-card-image-overlay" />
+                <div className="edu-card-logo-wrap">
+                  <Image src="/school-logo.png" alt="Logo" width={48} height={48} style={{ objectFit: 'contain' }} />
+                </div>
               </div>
-            </div>
+              <div className="edu-card-body">
+                <h3 className="edu-card-title">SSC (10th)</h3>
+                <p className="edu-card-inst">St. Aloysius School</p>
+                <div className="edu-card-meta">
+                  <span className="edu-pill"><Calendar size={14} /> Passed Out: 2016</span>
+                  <span className="edu-pill"><MapPin size={14} /> Yavatmal, Maharashtra</span>
+                </div>
+              </div>
+            </motion.div>
 
-          </motion.div>
+            {/* ENTRY 2: Junior College */}
+            <motion.div
+              className="edu-timeline-card"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+            >
+              <div className="edu-card-image-wrap">
+                <Image
+                  src="/school-real-2.jpg"
+                  alt="Wadhwani College"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+                <div className="edu-card-image-overlay" />
+                <div className="edu-card-logo-wrap">
+                  <GraduationCap size={32} color="#00d4d4" />
+                </div>
+              </div>
+              <div className="edu-card-body">
+                <h3 className="edu-card-title">HSC (12th) — Science</h3>
+                <p className="edu-card-inst">Wadhwani Junior College</p>
+                <div className="edu-card-meta">
+                  <span className="edu-pill"><Calendar size={14} /> Passed Out: 2018</span>
+                  <span className="edu-pill highlight"><BookOpen size={14} /> Vocational: Computer Science</span>
+                  <span className="edu-pill"><MapPin size={14} /> Yavatmal, Maharashtra</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* ENTRY 3: Engineering College */}
+            <motion.div
+              className="edu-timeline-card"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+            >
+              <div className="edu-card-image-wrap">
+                <Image
+                  src="/college-gate.png"
+                  alt="YCCE College"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                />
+                <div className="edu-card-image-overlay" />
+                <div className="edu-card-logo-wrap">
+                  <Briefcase size={32} color="#00d4d4" />
+                </div>
+              </div>
+              <div className="edu-card-body">
+                <h3 className="edu-card-title">B.E. Computer Technology</h3>
+                <p className="edu-card-inst">YCCE</p>
+                <div className="edu-card-meta">
+                  <span className="edu-pill"><Calendar size={14} /> Class of 2023</span>
+                  <span className="edu-pill highlight"><BookOpen size={14} /> DSA, OS, DBMS, CN</span>
+                  <span className="edu-pill"><MapPin size={14} /> Nagpur, Maharashtra</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+          
+          <div className="edu-timeline-fade-bottom" />
         </section>
 
         {/* ── CONTACT ── */}
@@ -898,9 +1001,10 @@ export default function Home() {
               </motion.div>
             </ScrollItem>
 
-            <SiteFooter />
           </ScrollReveal>
         </section>
+        
+        <SiteFooter />
       </main>
 
       <ProjectDetailModal
